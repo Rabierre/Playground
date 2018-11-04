@@ -12,6 +12,8 @@ class ContributeForm extends Component {
     loading: false
   };
 
+
+
   onSubmit = async event => {
 
     event.preventDefault();
@@ -20,7 +22,7 @@ class ContributeForm extends Component {
     this.setState({loading: true});
 
 
-    try {
+    {/*try {
       const accounts = await web3.eth.getAccounts();
       await project.methods.contribute().send({
 
@@ -34,8 +36,12 @@ class ContributeForm extends Component {
       this.setState({errorMessage: err.message});
 
     }
-
+*/}
     this.setState({loading: false, value:''});
+    this.props.onStaking(true);
+    this.props.onAssign(this.props.selectedCard);
+    this.props.onClose();
+    // this.props.selectedCard['test'] = 1;
 
 
   }
@@ -46,8 +52,9 @@ class ContributeForm extends Component {
       <Form onSubmit={this.onSubmit}>
         <Form.Field>
           <label> Amount to stake </label>
+
           <Input
-            value={this.state.value}
+            value={this.props.selectedCard.point}
             onChange={event => this.setState({value: event.target.value})}
             label='ether'
             labelPosition='right'

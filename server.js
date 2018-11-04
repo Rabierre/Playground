@@ -14,6 +14,7 @@ const fs = require('fs');
 const fileType = require('file-type');
 const bluebird = require('bluebird');
 const multiparty = require('multiparty');
+const axios = require('axios');
 require('dotenv').load();
 
 AWS.config.update({
@@ -64,23 +65,34 @@ app.prepare().then(() => {
 
   // server.use('/api', require('./routes/shows'));
   server.use('/api/shows', (req, res) => {
+
+    axios.get('https://snowball-api-backend.herokuapp.com/cards')
+    .then(response => {
+      console.log(response.data.url);
+      console.log(response.data.explanation);
+
+
+    })
+    .catch(error => {
+      console.log(error);
+    });
+
     return res.end('we made it');
   });
 
 
-
-  // server.use(handler);
+  server.use(cors());
   server.use(bodyParser.json());
   server.use(bodyParser.urlencoded({ extended: false }));
   server.use(cookieParser());
 
-  // server.use(cors({
-  //   'allowedHeaders': ['sessionId', 'Content-Type'],
-  //   'exposedHeaders': ['sessionId'],
-  //   'origin': '*',
-  //   'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-  //   'preflightContinue': false
-  // }));
+  server.use(cors({
+    'allowedHeaders': ['sessionId', 'Content-Type'],
+    'exposedHeaders': ['sessionId'],
+    'origin': '*',
+    'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    'preflightContinue': false
+  }));
   //
   // // server.use(fileUpload());
   server.use('/public', express.static(__dirname + '/public'));
