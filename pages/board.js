@@ -71,12 +71,13 @@ class ProjectBoard extends Component {
 
   }
 
+
   render() {
 
     return (
 
       <Layout>
-        <TotoBoard boardData={this.props.data}/>
+        <TotoBoard boardData={this.props.data} onBoardUpdate={(newBoardData) => this.setState({data: newBoardData})} />
       </Layout>
     )
   };

@@ -29,15 +29,19 @@ class TotoBoard extends Component {
 
 
   constructor(props) {
+
 		super(props);
 		this.state = {
 				backlogTickets: null,
         openDetail: false,
         openStaking: false,
         eventBus: null,
-        selectedCard: null,
-        isSelectedCardStaked: false
+        selectedCard: '',
+        isSelectedCardStaked: false,
+        boardData: this.props.boardData
+
 		};
+    console.log(this.state.boardData);
 
 	}
 
@@ -47,7 +51,19 @@ class TotoBoard extends Component {
       this.setState({eventBus: handle});
   }
 
-  showDetail = dimmer => () => this.setState({ dimmer, openDetail: true })
+  showDetail = dimmer => (cardId, metadata, laneId) => {
+
+    console.log('hoi------------');
+    console.log(metadata);
+
+    this.setState({selectedCard: metadata});
+    this.setState({ dimmer, openDetail: true });
+    console.log(cardId, metadata, laneId);
+    console.log(metadata);
+    console.log('------------');
+    console.log(this.state.boardData);
+
+  }
 
   closeDetail = () => this.setState({ openDetail: false })
 
@@ -61,20 +77,34 @@ class TotoBoard extends Component {
   showStaking = size => () => this.setState({ size, openStaking: true });
   closeStaking = () => this.setState({ openStaking: false });
 
-  onAssign = (card) => {
+  onCardAddHandler = (card, laneId) => {
 
+    console.log(card);
 
+    const updatedCard = card;
 
-          axios.post(`https://snowball-api-backend.herokuapp.com/cards/${card.id}/assign`, {
-            userId: UserId,
-            staking: 10
-          });
-          card['assigneeId'] = UserId;
-          console.log(card.id);
-          this.updateCard('IN_PROGRESS', card.id, card);
+    updatedCard['metadata'] = {'title': card['title'], 'description': card['description']};
+    updatedCard['laneId'] = laneId;
+    updatedCard['state'] = laneId;
+    updatedCard['label'] = '1';
+    updatedCard['point'] = 1;
+    updatedCard['comments'] = [];
+
+    this.state.eventBus.publish({type: 'ADD_CARD', laneId: laneId, card: updatedCard});
+    console.log(updatedCard);
+
   }
 
+  onAssign = (card) => {
 
+    axios.post(`https://snowball-api-backend.herokuapp.com/cards/${card.id}/assign`, {
+      userId: UserId,
+      staking: 10
+    });
+    card['assigneeId'] = UserId;
+    console.log(card.id);
+    this.updateCard('IN_PROGRESS', card.id, card);
+  }
 
   onDragEnd = (cardId, sourceLaneId, targetLaneId, position, cardDetails) => {
 
@@ -107,10 +137,7 @@ class TotoBoard extends Component {
     } else {
 
       this.undo(cardId, sourceLaneId, targetLaneId);
-
     }
-
-
 
   }
 
@@ -121,19 +148,21 @@ class TotoBoard extends Component {
     const { openStaking, size } = this.state
 
 
-
     return (
       <Layout>
         <h1>{SessionRole} - {UserId}</h1>
+
         <Board draggable
+              editable
+              onCardAdd={this.onCardAddHandler}
               eventBusHandle={this.setEventBus}
               laneDraggable={false}
+              style={{backgroundColor: 'lightgray'}}
               onCardClick={this.showDetail('inverted')}
               handleDragEnd={this.onDragEnd}
-              data={this.props.boardData} />
+              data={this.state.boardData} />
 
-
-        <DetailPageModal openDetail={this.state.openDetail} closeDetail={this.closeDetail}/>
+        <DetailPageModal openDetail={this.state.openDetail} closeDetail={this.closeDetail} selectedCard={this.state.selectedCard}/>
 
 
         <Modal size='mini' open={openStaking} onClose={this.closeStaking}>
@@ -142,7 +171,9 @@ class TotoBoard extends Component {
             <ContributeForm
                 address='0x3aafeFFc0aC78dC62512780fd9f191d19f8196B1'
                 selectedCard={this.state.selectedCard}
+
                 onClose={this.closeStaking}
+
                 onStaking={isSelectedCardStaked => this.setState({isSelectedCardStaked})}
                 onAssign={this.onAssign}
 
