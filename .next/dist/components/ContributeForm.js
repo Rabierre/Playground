@@ -50,7 +50,7 @@ var _routes = require('../routes');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _jsxFileName = '/Users/Daniel/Desktop/playground/components/ContributeForm.js';
+var _jsxFileName = '/Users/Daniel/Desktop/playground2/components/ContributeForm.js';
 
 
 var ContributeForm = function (_Component) {
@@ -69,9 +69,13 @@ var ContributeForm = function (_Component) {
     }
 
     return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = ContributeForm.__proto__ || (0, _getPrototypeOf2.default)(ContributeForm)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-      value: '',
+
       errorMessage: '',
       loading: false
+    }, _this.onSelectedCardChange = function (event) {
+
+      _this.props.selectedCard.point = event.target.value;
+      _this.props.onSelectedCardChange(_this.props.selectedCard);
     }, _this.onSubmit = function () {
       var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(event) {
         var project;
@@ -85,14 +89,16 @@ var ContributeForm = function (_Component) {
 
                 _this.setState({ loading: true });
 
-                _this.setState({ loading: false, value: '' });
                 _this.props.onStaking(true);
-                _this.props.onAssign(_this.props.selectedCard);
+
+                console.log(_this.props.selectedCard.point);
+                _this.props.onAssign(_this.props.selectedCard, _this.props.selectedCard.point);
+                _this.setState({ loading: false, value: '' });
                 _this.props.onClose();
               // this.props.selectedCard['test'] = 1;
 
 
-              case 7:
+              case 8:
               case 'end':
                 return _context.stop();
             }
@@ -109,36 +115,33 @@ var ContributeForm = function (_Component) {
   (0, _createClass3.default)(ContributeForm, [{
     key: 'render',
     value: function render() {
-      var _this3 = this;
 
       return _react2.default.createElement(_semanticUiReact.Form, { onSubmit: this.onSubmit, __source: {
           fileName: _jsxFileName,
-          lineNumber: 52
+          lineNumber: 62
         }
       }, _react2.default.createElement(_semanticUiReact.Form.Field, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 53
+          lineNumber: 63
         }
       }, _react2.default.createElement('label', {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 54
+          lineNumber: 64
         }
       }, ' Amount to stake '), _react2.default.createElement(_semanticUiReact.Input, {
         value: this.props.selectedCard.point,
-        onChange: function onChange(event) {
-          return _this3.setState({ value: event.target.value });
-        },
+        onChange: this.onSelectedCardChange,
         label: 'ether',
         labelPosition: 'right',
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 56
+          lineNumber: 66
         }
       })), _react2.default.createElement(_semanticUiReact.Button, { primary: true, loading: this.state.loading, __source: {
           fileName: _jsxFileName,
-          lineNumber: 63
+          lineNumber: 73
         }
       }, 'Put my stake!'));
     }
@@ -148,4 +151,4 @@ var ContributeForm = function (_Component) {
 }(_react.Component);
 
 exports.default = ContributeForm;
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbXBvbmVudHMvQ29udHJpYnV0ZUZvcm0uanMiXSwibmFtZXMiOlsiUmVhY3QiLCJDb21wb25lbnQiLCJGb3JtIiwiSW5wdXQiLCJNZXNzYWdlIiwiQnV0dG9uIiwiUHJvamVjdCIsIndlYjMiLCJSb3V0ZXIiLCJDb250cmlidXRlRm9ybSIsInN0YXRlIiwidmFsdWUiLCJlcnJvck1lc3NhZ2UiLCJsb2FkaW5nIiwib25TdWJtaXQiLCJldmVudCIsInByZXZlbnREZWZhdWx0IiwicHJvamVjdCIsInByb3BzIiwiYWRkcmVzcyIsInNldFN0YXRlIiwib25TdGFraW5nIiwib25Bc3NpZ24iLCJzZWxlY3RlZENhcmQiLCJvbkNsb3NlIiwicG9pbnQiLCJ0YXJnZXQiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxBQUFPLEFBQVE7Ozs7QUFDZixBQUFRLEFBQU0sQUFBTyxBQUFTOztBQUM5QixBQUFPLEFBQWE7Ozs7QUFDcEIsQUFBTyxBQUFVOzs7O0FBQ2pCLEFBQVEsQUFBYTs7Ozs7OztJQUVmLEE7Ozs7Ozs7Ozs7Ozs7Ozs0TixBQUVKO2FBQVEsQUFDQyxBQUNQO29CQUZNLEFBRVEsQUFDZDtlQUhNLEFBR0csQTtBQUhILEFBQ04sYSxBQU9GOzJGQUFXLGlCQUFBLEFBQU0sT0FBTjtZQUFBO3NFQUFBO29CQUFBOzZDQUFBO21CQUVUOztzQkFBQSxBQUFNLEFBQ0E7QUFIRywwQkFHTyx1QkFBUSxNQUFBLEFBQUssTUFIcEIsQUFHTyxBQUFtQixBQUVuQzs7c0JBQUEsQUFBSyxTQUFTLEVBQUMsU0FBZixBQUFjLEFBQVUsQUFrQnhCOztzQkFBQSxBQUFLLFNBQVMsRUFBQyxTQUFELEFBQVUsT0FBTyxPQUEvQixBQUFjLEFBQXVCLEFBQ3JDO3NCQUFBLEFBQUssTUFBTCxBQUFXLFVBQVgsQUFBcUIsQUFDckI7c0JBQUEsQUFBSyxNQUFMLEFBQVcsU0FBUyxNQUFBLEFBQUssTUFBekIsQUFBK0IsQUFDL0I7c0JBQUEsQUFBSyxNQUFMLEFBQVcsQUFDWDtBQTNCUzs7O21CQUFBO21CQUFBO2dDQUFBOztBQUFBO29CQUFBO0E7Ozs7Ozs7Ozs7NkJBZ0NGO21CQUVQOzs2QkFDRSxBQUFDLHVDQUFLLFVBQVUsS0FBaEIsQUFBcUI7b0JBQXJCO3NCQUFBLEFBQ0U7QUFERjtPQUFBLGtCQUNHLGNBQUQsc0JBQUEsQUFBTTs7b0JBQU47c0JBQUEsQUFDRTtBQURGO0FBQUEseUJBQ0UsY0FBQTs7b0JBQUE7c0JBQUE7QUFBQTtBQUFBLFNBREYsQUFDRSxBQUVBLHNDQUFBLEFBQUM7ZUFDUSxLQUFBLEFBQUssTUFBTCxBQUFXLGFBRHBCLEFBQ2lDLEFBQy9CO2tCQUFVLHlCQUFBO2lCQUFTLE9BQUEsQUFBSyxTQUFTLEVBQUMsT0FBTyxNQUFBLEFBQU0sT0FBckMsQUFBUyxBQUFjLEFBQXFCO0FBRnhELEFBR0U7ZUFIRixBQUdRLEFBQ047dUJBSkYsQUFJZ0I7O29CQUpoQjtzQkFKSixBQUNFLEFBR0UsQUFPRjtBQVBFO0FBQ0UsMkJBTUosQUFBQyx5Q0FBTyxTQUFSLE1BQWdCLFNBQVMsS0FBQSxBQUFLLE1BQTlCLEFBQW9DO29CQUFwQztzQkFBQTtBQUFBO1NBWkosQUFDRSxBQVdFLEFBT0w7Ozs7O0FBL0QwQixBLEFBb0U3Qjs7a0JBQUEsQUFBZSIsImZpbGUiOiJDb250cmlidXRlRm9ybS5qcyIsInNvdXJjZVJvb3QiOiIvVXNlcnMvRGFuaWVsL0Rlc2t0b3AvcGxheWdyb3VuZCJ9
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbXBvbmVudHMvQ29udHJpYnV0ZUZvcm0uanMiXSwibmFtZXMiOlsiUmVhY3QiLCJDb21wb25lbnQiLCJGb3JtIiwiSW5wdXQiLCJNZXNzYWdlIiwiQnV0dG9uIiwiUHJvamVjdCIsIndlYjMiLCJSb3V0ZXIiLCJDb250cmlidXRlRm9ybSIsInN0YXRlIiwiZXJyb3JNZXNzYWdlIiwibG9hZGluZyIsIm9uU2VsZWN0ZWRDYXJkQ2hhbmdlIiwiZXZlbnQiLCJwcm9wcyIsInNlbGVjdGVkQ2FyZCIsInBvaW50IiwidGFyZ2V0IiwidmFsdWUiLCJvblN1Ym1pdCIsInByZXZlbnREZWZhdWx0IiwicHJvamVjdCIsImFkZHJlc3MiLCJzZXRTdGF0ZSIsIm9uU3Rha2luZyIsImNvbnNvbGUiLCJsb2ciLCJvbkFzc2lnbiIsIm9uQ2xvc2UiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxBQUFPLEFBQVE7Ozs7QUFDZixBQUFRLEFBQU0sQUFBTyxBQUFTOztBQUM5QixBQUFPLEFBQWE7Ozs7QUFDcEIsQUFBTyxBQUFVOzs7O0FBQ2pCLEFBQVEsQUFBYTs7Ozs7OztJLEFBRWY7Ozs7Ozs7Ozs7Ozs7Ozs0TkFFSixBOztvQkFBUSxBQUVRLEFBQ2Q7ZUFITSxBLEFBR0c7QUFISCxBQUVOLGEsQUFJRix1QkFBdUIsVUFBQSxBQUFDLE9BQVUsQUFHaEM7O1lBQUEsQUFBSyxNQUFMLEFBQVcsYUFBWCxBQUF3QixRQUFRLE1BQUEsQUFBTSxPQUF0QyxBQUE2QyxBQUM3QztZQUFBLEFBQUssTUFBTCxBQUFXLHFCQUFxQixNQUFBLEFBQUssTUFBckMsQUFBMkMsQUFDNUM7QSxhLEFBRUQ7MkZBQVcsaUJBQUEsQUFBTSxPQUFOO1lBQUE7c0VBQUE7b0JBQUE7NkNBQUE7bUJBRVQ7O3NCQUFBLEFBQU0sQUFDQTtBQUhHLDBCQUdPLHVCQUFRLE1BQUEsQUFBSyxNQUhwQixBQUdPLEFBQW1CLEFBRW5DOztzQkFBQSxBQUFLLFNBQVMsRUFBQyxTQUFmLEFBQWMsQUFBVSxBQW9CeEI7O3NCQUFBLEFBQUssTUFBTCxBQUFXLFVBQVgsQUFBcUIsQUFFckI7O3dCQUFBLEFBQVEsSUFBSSxNQUFBLEFBQUssTUFBTCxBQUFXLGFBQXZCLEFBQW9DLEFBQ3BDO3NCQUFBLEFBQUssTUFBTCxBQUFXLFNBQVMsTUFBQSxBQUFLLE1BQXpCLEFBQStCLGNBQWMsTUFBQSxBQUFLLE1BQUwsQUFBVyxhQUF4RCxBQUFxRSxBQUNyRTtzQkFBQSxBQUFLLFNBQVMsRUFBQyxTQUFELEFBQVUsT0FBTyxPQUEvQixBQUFjLEFBQXVCLEFBQ3JDO3NCQUFBLEFBQUssTUFBTCxBQUFXLEFBQ1g7QUEvQlM7OzttQkFBQTttQkFBQTtnQ0FBQTs7QUFBQTtvQkFBQTtBOzs7Ozs7Ozs7OzZCQXFDRixBQUVQOzs2QkFDRSxBQUFDLHVDQUFLLFVBQVUsS0FBaEIsQUFBcUI7b0JBQXJCO3NCQUFBLEFBQ0U7QUFERjtPQUFBLGtCQUNHLGNBQUQsc0JBQUEsQUFBTTs7b0JBQU47c0JBQUEsQUFDRTtBQURGO0FBQUEseUJBQ0UsY0FBQTs7b0JBQUE7c0JBQUE7QUFBQTtBQUFBLFNBREYsQUFDRSxBQUVBLHNDQUFBLEFBQUM7ZUFDUSxLQUFBLEFBQUssTUFBTCxBQUFXLGFBRHBCLEFBQ2lDLEFBQy9CO2tCQUFVLEtBRlosQUFFaUIsQUFDZjtlQUhGLEFBR1EsQUFDTjt1QkFKRixBQUlnQjs7b0JBSmhCO3NCQUpKLEFBQ0UsQUFHRSxBQU9GO0FBUEU7QUFDRSwyQkFNSixBQUFDLHlDQUFPLFNBQVIsTUFBZ0IsU0FBUyxLQUFBLEFBQUssTUFBOUIsQUFBb0M7b0JBQXBDO3NCQUFBO0FBQUE7U0FaSixBQUNFLEFBV0UsQUFPTDs7Ozs7QUF6RTBCLEEsQUE4RTdCOztrQkFBQSxBQUFlIiwiZmlsZSI6IkNvbnRyaWJ1dGVGb3JtLmpzIiwic291cmNlUm9vdCI6Ii9Vc2Vycy9EYW5pZWwvRGVza3RvcC9wbGF5Z3JvdW5kMiJ9

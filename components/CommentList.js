@@ -11,10 +11,8 @@ class CommentList extends Component {
     super(props);
 
     this.state = {
-
       comment: ''
     };
-
   }
 
   onAddCommentHandler = () => {
@@ -23,48 +21,36 @@ class CommentList extends Component {
     const cardId = this.props.selectedCard.cardId;
 
     axios.post(`https://snowball-api-backend.herokuapp.com/cards/${cardId}/comment`, {
-      userId: UserId,
+      userId: ls.get('User').id,
       title: this.state.comment,
       content: this.state.comment
     }).then(function (response) {
 
       if (response.status == 200) {
-
-          self.props.selectedCard.comments.push({title: self.state.comment});
-          self.setState({comment: ''});
+        self.props.selectedCard.comments.push({title: self.state.comment});
+        self.setState({comment: ''});
       }
     })
-
   }
 
   onChangeHandler = (event) => {
-
     this.setState({comment: event.target.value});
   }
 
   render() {
 
     let comments = this.props.selectedCard.comments;
-
     if (comments) {
-
-
       comments = comments.map(comment => {
-
         return (
-
           <List.Item>
             <Image avatar src='http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg' />
             <List.Content>
               <List.Header>{comment.title}</List.Header>
-
             </List.Content>
           </List.Item>
-
         );
-
       });
-
     } else {
       comments = [];
     }

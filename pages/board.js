@@ -9,7 +9,7 @@ import Project from '../ethereum/project';
 import web3 from '../ethereum/web3';
 import ContributeForm from '../components/ContributeForm';
 import TotoBoard from '../components/TodoBoard'
-
+import ls from 'local-storage'
 
 class ProjectBoard extends Component {
 
@@ -22,13 +22,7 @@ class ProjectBoard extends Component {
         openStaking: false
     };
 
-    const config = {
-      headers: {
-        'Access-Control-Allow-Origin': '*'
-      },
-      withCredentials: true,
-      credentials: 'same-origin',
-    };
+    ls.set('User', {id: 'user0000', role: 'member'});
 
 
     const rawData = await axios.get('https://snowball-api-backend.herokuapp.com/projects/project_XwPp9xaz/cards');

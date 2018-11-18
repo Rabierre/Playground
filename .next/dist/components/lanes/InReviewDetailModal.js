@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _stringify = require('babel-runtime/core-js/json/stringify');
+
+var _stringify2 = _interopRequireDefault(_stringify);
+
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -30,8 +34,6 @@ var _react2 = _interopRequireDefault(_react);
 
 var _semanticUiReact = require('semantic-ui-react');
 
-var _SessionMockup = require('../SessionMockup');
-
 var _CommentList = require('../CommentList');
 
 var _CommentList2 = _interopRequireDefault(_CommentList);
@@ -46,7 +48,7 @@ var _SubmissionForm2 = _interopRequireDefault(_SubmissionForm);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _jsxFileName = '/Users/Daniel/Desktop/playground/components/lanes/InReviewDetailModal.js';
+var _jsxFileName = '/Users/Daniel/Desktop/playground2/components/lanes/InReviewDetailModal.js';
 
 
 var InReviewDetailModal = function (_Component) {
@@ -74,42 +76,64 @@ var InReviewDetailModal = function (_Component) {
       return _react2.default.createElement('div', {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 25
+          lineNumber: 24
         }
       }, _react2.default.createElement(_semanticUiReact.Modal, { open: this.props.openDetail == 'IN_REVIEW', onClose: this.props.closeDetail, __source: {
           fileName: _jsxFileName,
-          lineNumber: 26
+          lineNumber: 25
         }
       }, _react2.default.createElement(_semanticUiReact.Form, {
         __source: {
           fileName: _jsxFileName,
+          lineNumber: 26
+        }
+      }, _react2.default.createElement(_semanticUiReact.Button.Group, { size: 'large', fluid: true, __source: {
+          fileName: _jsxFileName,
           lineNumber: 27
         }
-      }, _react2.default.createElement(_semanticUiReact.Form.Field, { style: { fontSize: '20px', fontWeight: 'bold' }, control: _semanticUiReact.TextArea, value: this.props.selectedCard.title, __source: {
+      }, _react2.default.createElement(_semanticUiReact.Button, { onClick: this.props.onUpVote, __source: {
+          fileName: _jsxFileName,
+          lineNumber: 28
+        }
+      }, 'Up vote'), _react2.default.createElement(_semanticUiReact.Button.Or, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 29
+        }
+      }), _react2.default.createElement(_semanticUiReact.Button, { onClick: this.props.onDownVote, __source: {
+          fileName: _jsxFileName,
+          lineNumber: 30
+        }
+      }, 'Down vote')), _react2.default.createElement(_semanticUiReact.Form.Field, { onChange: this.props.onChangeTitleHandler, style: { fontSize: '20px', fontWeight: 'bold' }, control: _semanticUiReact.TextArea, value: this.props.selectedCard.title, __source: {
+          fileName: _jsxFileName,
+          lineNumber: 32
+        }
+      }), _react2.default.createElement(_semanticUiReact.Form.Field, { onChange: this.props.onChangeDescriptionHandler, control: _semanticUiReact.TextArea, placeholder: 'Add a more detailed description...', value: this.props.selectedCard.description, __source: {
           fileName: _jsxFileName,
           lineNumber: 33
-        }
-      }), _react2.default.createElement(_semanticUiReact.Form.Field, { control: _semanticUiReact.TextArea, placeholder: 'Add a more detailed description...', value: this.props.selectedCard.description, __source: {
-          fileName: _jsxFileName,
-          lineNumber: 34
         }
       })), _react2.default.createElement(_semanticUiReact.Modal.Content, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 37
+          lineNumber: 36
         }
       }, _react2.default.createElement(_semanticUiReact.Modal.Description, {
         __source: {
           fileName: _jsxFileName,
+          lineNumber: 37
+        }
+      }, _react2.default.createElement('h1', {
+        __source: {
+          fileName: _jsxFileName,
           lineNumber: 38
         }
-      }, _react2.default.createElement(_Submissions2.default, { selectedCard: this.props.selectedCard, __source: {
+      }, (0, _stringify2.default)(this.props.selectedCard.submission)), _react2.default.createElement(_Submissions2.default, { selectedCard: this.props.selectedCard, __source: {
           fileName: _jsxFileName,
-          lineNumber: 40
+          lineNumber: 39
         }
       }), _react2.default.createElement(_CommentList2.default, { selectedCard: this.props.selectedCard, __source: {
           fileName: _jsxFileName,
-          lineNumber: 41
+          lineNumber: 40
         }
       })))));
     }
@@ -119,4 +143,4 @@ var InReviewDetailModal = function (_Component) {
 }(_react.Component);
 
 exports.default = InReviewDetailModal;
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbXBvbmVudHMvbGFuZXMvSW5SZXZpZXdEZXRhaWxNb2RhbC5qcyJdLCJuYW1lcyI6WyJSZWFjdCIsIkNvbXBvbmVudCIsIkJ1dHRvbiIsIkhlYWRlciIsIkljb24iLCJJbnB1dCIsIkxpc3QiLCJJbWFnZSIsIk1vZGFsIiwiVGV4dEFyZWEiLCJJbnB1dEZvcm1hdCIsIkZvcm0iLCJTZXNzaW9uUm9sZSIsIlVzZXJJZCIsIkNvbW1lbnRMaXN0IiwiU3VibWlzc2lvbnMiLCJTdWJtaXNzaW9uRm9ybSIsIkluUmV2aWV3RGV0YWlsTW9kYWwiLCJwcm9wcyIsInN0YXRlIiwiY29tbWVudCIsInNlbGVjdGVkQ2FyZCIsIm9wZW5EZXRhaWwiLCJjbG9zZURldGFpbCIsImZvbnRTaXplIiwiZm9udFdlaWdodCIsInRpdGxlIiwiZGVzY3JpcHRpb24iXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsQUFBTyxBQUFROzs7O0FBQ2YsQUFBUyxBQUFRLEFBQVEsQUFBTSxBQUFPLEFBQU0sQUFBTyxBQUFPLEFBQVUsQUFBYTs7QUFDakYsQUFBUSxBQUFhLEFBQWE7O0FBQ2xDLEFBQU8sQUFBaUI7Ozs7QUFDeEIsQUFBTyxBQUFpQjs7OztBQUN4QixBQUFPLEFBQW9COzs7Ozs7Ozs7SUFFckIsQTsrQ0FFSjs7K0JBQUEsQUFBWSxPQUFPO3dDQUFBOztnS0FBQSxBQUNYLEFBRU47O1VBQUEsQUFBSzs7ZUFBUSxBQUVGLEFBQ1Q7b0JBQWMsTUFBQSxBQUFLLE1BTkosQUFHakIsQUFBYSxBQUdjOztBQUhkLEFBRVg7O1dBS0g7Ozs7OzZCQUVRLEFBRVA7OzZCQUNJLGNBQUE7O29CQUFBO3NCQUFBLEFBQ0U7QUFERjtBQUFBLE9BQUEsa0JBQ0UsQUFBQyx3Q0FBTSxNQUFNLEtBQUEsQUFBSyxNQUFMLEFBQVcsY0FBeEIsQUFBc0MsYUFBYSxTQUFTLEtBQUEsQUFBSyxNQUFqRSxBQUF1RTtvQkFBdkU7c0JBQUEsQUFDQTtBQURBO3lCQUNBLEFBQUM7O29CQUFEO3NCQUFBLEFBTUU7QUFORjtBQUFBLHVDQU1FLEFBQUMsc0JBQUQsQUFBTSxTQUFNLE9BQU8sRUFBQyxVQUFELEFBQVcsUUFBUSxZQUF0QyxBQUFtQixBQUErQixVQUFsRCxBQUEyRCxBQUFTLG9DQUFVLE9BQU8sS0FBQSxBQUFLLE1BQUwsQUFBVyxhQUFoRyxBQUE2RztvQkFBN0c7c0JBTkYsQUFNRSxBQUNBO0FBREE7d0NBQ0EsQUFBQyxzQkFBRCxBQUFNLFNBQU4sQUFBWSxBQUFTLG9DQUFVLGFBQS9CLEFBQTJDLHNDQUFxQyxPQUFPLEtBQUEsQUFBSyxNQUFMLEFBQVcsYUFBbEcsQUFBK0c7b0JBQS9HO3NCQVJGLEFBQ0EsQUFPRSxBQUdGO0FBSEU7MkJBR0QsY0FBRCx1QkFBQSxBQUFPOztvQkFBUDtzQkFBQSxBQUNFO0FBREY7QUFBQSx5QkFDRyxjQUFELHVCQUFBLEFBQU87O29CQUFQO3NCQUFBLEFBRUU7QUFGRjtBQUFBLHlCQUVFLEFBQUMsdUNBQVksY0FBYyxLQUFBLEFBQUssTUFBaEMsQUFBc0M7b0JBQXRDO3NCQUZGLEFBRUUsQUFDQTtBQURBOzBCQUNBLEFBQUMsdUNBQVksY0FBYyxLQUFBLEFBQUssTUFBaEMsQUFBc0M7b0JBQXRDO3NCQWpCVixBQUNJLEFBQ0UsQUFXQSxBQUNFLEFBR0UsQUFVWDtBQVZXOzs7Ozs7QUFqQ29CLEEsQUFpRGxDOztrQkFBQSxBQUFlIiwiZmlsZSI6IkluUmV2aWV3RGV0YWlsTW9kYWwuanMiLCJzb3VyY2VSb290IjoiL1VzZXJzL0RhbmllbC9EZXNrdG9wL3BsYXlncm91bmQifQ==
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbXBvbmVudHMvbGFuZXMvSW5SZXZpZXdEZXRhaWxNb2RhbC5qcyJdLCJuYW1lcyI6WyJSZWFjdCIsIkNvbXBvbmVudCIsIkJ1dHRvbiIsIkhlYWRlciIsIkljb24iLCJJbnB1dCIsIkxpc3QiLCJJbWFnZSIsIk1vZGFsIiwiVGV4dEFyZWEiLCJJbnB1dEZvcm1hdCIsIkZvcm0iLCJDb21tZW50TGlzdCIsIlN1Ym1pc3Npb25zIiwiU3VibWlzc2lvbkZvcm0iLCJJblJldmlld0RldGFpbE1vZGFsIiwicHJvcHMiLCJzdGF0ZSIsImNvbW1lbnQiLCJzZWxlY3RlZENhcmQiLCJvcGVuRGV0YWlsIiwiY2xvc2VEZXRhaWwiLCJvblVwVm90ZSIsIm9uRG93blZvdGUiLCJvbkNoYW5nZVRpdGxlSGFuZGxlciIsImZvbnRTaXplIiwiZm9udFdlaWdodCIsInRpdGxlIiwib25DaGFuZ2VEZXNjcmlwdGlvbkhhbmRsZXIiLCJkZXNjcmlwdGlvbiIsInN1Ym1pc3Npb24iXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUFBLEFBQU8sQUFBUTs7OztBQUNmLEFBQVMsQUFBUSxBQUFRLEFBQU0sQUFBTyxBQUFNLEFBQU8sQUFBTyxBQUFVLEFBQWE7O0FBQ2pGLEFBQU8sQUFBaUI7Ozs7QUFDeEIsQUFBTyxBQUFpQjs7OztBQUN4QixBQUFPLEFBQW9COzs7Ozs7Ozs7SUFFckIsQTsrQ0FFSjs7K0JBQUEsQUFBWSxPQUFPO3dDQUFBOztnS0FBQSxBQUNYLEFBRU47O1VBQUEsQUFBSzs7ZUFBUSxBQUVGLEFBQ1Q7b0JBQWMsTUFBQSxBQUFLLE1BTkosQUFHakIsQUFBYSxBQUdjOztBQUhkLEFBRVg7O1dBS0g7Ozs7OzZCQUVRLEFBRVA7OzZCQUNJLGNBQUE7O29CQUFBO3NCQUFBLEFBQ0U7QUFERjtBQUFBLE9BQUEsa0JBQ0UsQUFBQyx3Q0FBTSxNQUFNLEtBQUEsQUFBSyxNQUFMLEFBQVcsY0FBeEIsQUFBc0MsYUFBYSxTQUFTLEtBQUEsQUFBSyxNQUFqRSxBQUF1RTtvQkFBdkU7c0JBQUEsQUFDQTtBQURBO3lCQUNBLEFBQUM7O29CQUFEO3NCQUFBLEFBQ0U7QUFERjtBQUFBLHlCQUNHLGNBQUQsd0JBQUEsQUFBUSxTQUFNLE1BQWQsQUFBbUIsU0FBUSxPQUEzQjtvQkFBQTtzQkFBQSxBQUNFO0FBREY7eUJBQ0UsQUFBQyx5Q0FBTyxTQUFTLEtBQUEsQUFBSyxNQUF0QixBQUE0QjtvQkFBNUI7c0JBQUE7QUFBQTtTQURGLEFBQ0UsQUFDQSwwQ0FBQSxBQUFDLHdCQUFELEFBQVE7O29CQUFSO3NCQUZGLEFBRUUsQUFDQTtBQURBO0FBQUEsMEJBQ0EsQUFBQyx5Q0FBTyxTQUFTLEtBQUEsQUFBSyxNQUF0QixBQUE0QjtvQkFBNUI7c0JBQUE7QUFBQTtTQUpKLEFBQ0UsQUFHRSxBQUVGLDZDQUFBLEFBQUMsc0JBQUQsQUFBTSxTQUFNLFVBQVUsS0FBQSxBQUFLLE1BQTNCLEFBQWlDLHNCQUFzQixPQUFPLEVBQUMsVUFBRCxBQUFXLFFBQVEsWUFBakYsQUFBOEQsQUFBK0IsVUFBN0YsQUFBc0csQUFBUyxvQ0FBVSxPQUFPLEtBQUEsQUFBSyxNQUFMLEFBQVcsYUFBM0ksQUFBd0o7b0JBQXhKO3NCQU5GLEFBTUUsQUFDQTtBQURBO3dDQUNBLEFBQUMsc0JBQUQsQUFBTSxTQUFNLFVBQVUsS0FBQSxBQUFLLE1BQTNCLEFBQWlDLDRCQUFqQyxBQUE2RCxBQUFTLG9DQUFVLGFBQWhGLEFBQTRGLHNDQUFxQyxPQUFPLEtBQUEsQUFBSyxNQUFMLEFBQVcsYUFBbkosQUFBZ0s7b0JBQWhLO3NCQVJGLEFBQ0EsQUFPRSxBQUdGO0FBSEU7MkJBR0QsY0FBRCx1QkFBQSxBQUFPOztvQkFBUDtzQkFBQSxBQUNFO0FBREY7QUFBQSx5QkFDRyxjQUFELHVCQUFBLEFBQU87O29CQUFQO3NCQUFBLEFBQ0U7QUFERjtBQUFBLHlCQUNFLGNBQUE7O29CQUFBO3NCQUFBLEFBQUs7QUFBTDtBQUFBLGtDQUFvQixLQUFBLEFBQUssTUFBTCxBQUFXLGFBRGpDLEFBQ0UsQUFBSyxBQUF1QyxBQUM1Qyw4QkFBQSxBQUFDLHVDQUFZLGNBQWMsS0FBQSxBQUFLLE1BQWhDLEFBQXNDO29CQUF0QztzQkFGRixBQUVFLEFBQ0E7QUFEQTswQkFDQSxBQUFDLHVDQUFZLGNBQWMsS0FBQSxBQUFLLE1BQWhDLEFBQXNDO29CQUF0QztzQkFqQlYsQUFDSSxBQUNFLEFBV0EsQUFDRSxBQUdFLEFBVVg7QUFWVzs7Ozs7O0FBakNvQixBLEFBaURsQzs7a0JBQUEsQUFBZSIsImZpbGUiOiJJblJldmlld0RldGFpbE1vZGFsLmpzIiwic291cmNlUm9vdCI6Ii9Vc2Vycy9EYW5pZWwvRGVza3RvcC9wbGF5Z3JvdW5kMiJ9

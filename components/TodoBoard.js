@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Board from 'react-trello'
 // import {Card, Grid, Button} from 'semantic-ui-react';
-import {Container,Grid, Dimmer, Loader, Segment, Button, Card, Image, Tab, Modal, Header, TextArea,  InputFormat, Form } from 'semantic-ui-react';
+import {Container,Grid, Dimmer, Loader, Segment, Button, Card, Image, Tab, Modal, Header, TextArea,  InputFormat, Form, Dropdown} from 'semantic-ui-react';
 
 import Countdown from 'react-countdown-now';
 import axios from 'axios';
@@ -14,18 +14,12 @@ import web3 from '../ethereum/web3';
 import FileUpload from './FileUpload';
 import ContributeForm from './ContributeForm';
 import Layout from './Layout';
-import DetailPageModal from './DetailPageModal'
-import {SessionRole, UserId }from './SessionMockup'
+import DetailPageModal from './DetailPageModal';
+
 import Timer from './Timer';
 import CountTimer from './CountTimer'
-
-const CONFIG = {
-  headers: {
-    'Access-Control-Allow-Origin': '*'
-  },
-  withCredentials: true,
-  credentials: 'same-origin',
-};
+import VotingListModal from './VotingListModal';
+import ls from 'local-storage'
 
 class TotoBoard extends Component {
 
@@ -37,6 +31,7 @@ class TotoBoard extends Component {
 				backlogTickets: null,
         openDetail: '',
         openStaking: false,
+        openVoting: false,
         eventBus: null,
         selectedCard: '',
         isSelectedCardStaked: false,
@@ -44,7 +39,10 @@ class TotoBoard extends Component {
         count: 10,
         remainingMinutes: 0,
         remainingSeconds: 0,
-        isLoading: false
+        isLoading: false,
+        votingDone: true,
+        votingList: null,
+        countdown: null
 
 		};
 
@@ -54,23 +52,82 @@ class TotoBoard extends Component {
 
 	}
 
-  componentWillMount() {
-    {/*this.state.boardData.lanes.map(lane => {
+  componentDidMount() {
+    this.onCoundownHandler();
 
-      if (lane.id == 'IN_REVIEW') {
+    const self = this;
 
-        if (lane.cards.length > 0) {
-          this.setState({isLoading: true});
-        }
+    console.log('TodoBoard componentDidMount');
+    console.log("Currently " + ls.get('User').id + " " + ls.get('User').role);
+
+    axios.post(`https://snowball-api-backend.herokuapp.com/projects/project_XwPp9xaz/vote-list`, {
+      userId: ls.get('User').id
+
+    }).then(function (response) {
+
+      if (response.data.length > 0) {
+
+        console.log(response.data);
+        self.setState({votingDone: false});
+        self.setState({votingList: response.data});
+        self.onVotingList();
+        {/*self.setState({isLoading: true});*/}
+      }
+    });
+
+
+
+  }
+
+  componentDidUpdate() {
+
+  }
+
+  onUserSelectHandler = (event, data) => {
+
+    console.log(data.value);
+    ls.set('User', data.value);
+    window.location.reload();
+
+  }
+
+  onVotingList = () => {
+
+    let nVoteNeeded = 0;
+
+    const votingCards = this.state.votingList
+
+    votingCards.map(card => {
+
+      if (!card.voted) {
+        nVoteNeeded++;
       }
 
-      this.setState({'openDetail': 'IN_REVIEW'});
-    })*/}
+    });
+
+    if (nVoteNeeded == 0) {
+
+
+      this.setState({votingDone: true});
+
+    } else {
+      this.setState({openVoting: true});
+    }
+    console.log("nVoteNeeded: " + nVoteNeeded);
+
   }
 
   setEventBus = (handle) => {
 
       this.setState({eventBus: handle});
+  }
+
+  onDataChangeHandler = (newData) =>{
+
+    console.log('data changed');
+    console.log(newData);
+    this.setState({boardData: newData})
+
   }
 
   showDetail = dimmer => (cardId, metadata, laneId) => {
@@ -83,7 +140,46 @@ class TotoBoard extends Component {
 
   }
 
-  closeDetail = () => this.setState({ openDetail: false })
+  closeDetail = () => {
+    const self = this;
+    console.log('closedetail');
+    console.log(this.state.selectedCard);
+
+
+    if (this.state.selectedCard.laneId != ('IN_REVIEW' || 'IN_COMPLETE')) {
+
+      this.setState({isLoading: true});
+
+      const card = this.state.selectedCard;
+
+      axios.post(`https://snowball-api-backend.herokuapp.com/cards/${card.cardId}/update`, {
+        userId: ls.get('User').id,
+        title: card['title'],
+        description: card['description']
+
+      }).then(function (response) {
+
+        console.log(response);
+
+        if (response.status == 200) {
+
+            self.updateCard(card.laneId, card.cardId, response.data);
+            self.setState({isLoading: false});
+            self.setState({ openDetail: false })
+
+            {/*self.state.boardData.lanes[]*/}
+            {/*this.sta response.data*/}
+        }
+
+      })
+
+    } else {
+      this.setState({ openDetail: false })
+    }
+
+
+
+  }
 
   updateCard = (targetLaneId, cardId, updatedCard) => {
 
@@ -93,7 +189,11 @@ class TotoBoard extends Component {
   }
   undo = (cardId, sourceLaneId, targetLaneId) => this.state.eventBus.publish({type: 'MOVE_CARD', fromLaneId: targetLaneId, toLaneId: sourceLaneId, cardId: cardId, index: 0})
   showStaking = size => () => this.setState({ size, openStaking: true });
-  closeStaking = () => this.setState({ openStaking: false });
+  closeStaking = () => {
+
+    this.setState({ openStaking: false });
+
+  }
 
 
   countDown = () => {
@@ -107,16 +207,17 @@ class TotoBoard extends Component {
   onCardAddHandler = (card, laneId) => {
 
     const self = this;
-
+    console.log('onCardAddHandler');
     console.log(card);
+    console.log(card['label']);
 
     const updatedCard = card;
 
     updatedCard['metadata'] = {'title': card['title'], 'description': card['description'], 'comments': []};
     updatedCard['laneId'] = laneId;
     updatedCard['state'] = laneId;
-    updatedCard['label'] = '1';
-    updatedCard['point'] = 1;
+    updatedCard['label'] = card['label'];
+    updatedCard['point'] = parseInt(card['label']);
     updatedCard['comments'] = [];
 
     this.setState({isLoading: true});
@@ -124,9 +225,10 @@ class TotoBoard extends Component {
     this.updateCard('BACKLOG', card.id, updatedCard);
 
     axios.post(`https://snowball-api-backend.herokuapp.com/projects/project_XwPp9xaz/card`, {
-      userId: UserId,
+      userId: ls.get('User').id,
       title: card['title'],
       description: card['description']
+
     }).then(function (response) {
 
       if (response.status == 200) {
@@ -138,19 +240,39 @@ class TotoBoard extends Component {
 
   }
 
-  onAssign = (card) => {
+  onCardDeleteHandler = (cardId, laneId) => {
+    const self = this;
+
+    this.setState({isLoading: true});
+    axios.post(`https://snowball-api-backend.herokuapp.com/cards/${cardId}/archive`, {
+      userId: ls.get('User').id,
+
+    }).then(function (response) {
+
+      if (response.status == 200) {
+
+          self.setState({isLoading: false});
+      }
+
+    })
+
+  }
+
+  onAssign = (card, stake) => {
 
     const self = this;
 
     this.setState({isLoading: true});
 
+    console.log(stake);
+
     axios.post(`https://snowball-api-backend.herokuapp.com/cards/${card.id}/assign`, {
-      userId: UserId,
-      staking: 10
+      userId: ls.get('User').id,
+      staking: stake
     }).then(function (response) {
 
       if (response.status == 200) {
-        card['assigneeId'] = UserId;
+        card['assigneeId'] = ls.get('User').id;
 
         self.updateCard('IN_PROGRESS', card.id, card);
       }
@@ -160,6 +282,7 @@ class TotoBoard extends Component {
       console.log(error);
 
     }).then(function () {
+      self.onCoundownHandler();
       self.setState({isLoading: false});
   });
 
@@ -173,28 +296,30 @@ class TotoBoard extends Component {
 
     console.log(cardId, sourceLaneId, targetLaneId, position, cardDetails);
 
-    if (sourceLaneId == 'BACKLOG' && targetLaneId == 'NOT_STARTED' && SessionRole == 'admin') {
+    if (sourceLaneId == 'BACKLOG' && targetLaneId == 'NOT_STARTED' && (ls.get('User').role == 'TPM' | ls.get('User').role == 'su')) {
 
 
-      if (cardDetails.title == '' | cardDetails.description == '' | cardDetails.label == '') {
+      if (cardDetails.title != '' && cardDetails.description != '') {
 
+        this.setState({isLoading: true});
+        axios.post(`https://snowball-api-backend.herokuapp.com/cards/${cid}/ready`, {
+          userId: ls.get('User').id,
+          point: 5
+        }).then(function (response) {
+
+          if (response.status == 200) {
+
+              self.setState({isLoading: false});
+          }
+
+        })
+
+      } else {
         alert('모든 내용을 채워야 합니다.');
         this.undo(cardId, sourceLaneId, targetLaneId);
-
       }
 
-      this.setState({isLoading: true});
-      axios.post(`https://snowball-api-backend.herokuapp.com/cards/${cid}/reset`, {
-        userId: UserId,
-        point: parseInt(cardDetails.label)
-      }).then(function (response) {
 
-        if (response.status == 200) {
-
-            self.setState({isLoading: false});
-        }
-
-      })
 
     } else if (sourceLaneId == 'NOT_STARTED' && targetLaneId == 'IN_PROGRESS') {
 
@@ -204,7 +329,7 @@ class TotoBoard extends Component {
 
       this.setState({isLoading: true});
       axios.post(`https://snowball-api-backend.herokuapp.com/cards/${cid}/submit`, {
-        userId: UserId
+        userId: ls.get('User').id
       }).then(function (response) {
 
         if (response.status == 200) {
@@ -231,6 +356,7 @@ class TotoBoard extends Component {
 
   }
 
+
   Completionist = () => <span>You are good to go!</span>;
 
   renderer = ({ hours, minutes, seconds, completed }) => {
@@ -250,55 +376,92 @@ class TotoBoard extends Component {
 
   }
 
-  onVotingList = () => {
+  onCloseVotingList = () => {
 
-    this.state.boardData.lanes.map(lane => {
+    const self = this;
 
-      if (lane.id == 'IN_REVIEW') {
+    axios.post(`https://snowball-api-backend.herokuapp.com/projects/project_XwPp9xaz/vote-list`, {
+      userId: ls.get('User').id
 
-        if (lane.cards.length > 0) {
-          this.setState({isLoading: true});
-        }
+    }).then(function (response) {
+
+      if (response.data.length == 0) {
+        self.setState({openVoting: false});
+      } else {
+        alert('Please finish voting!');
       }
+    });
 
-    })
 
   }
 
+  onCoundownHandler = () => {
+
+    const self = this;
+
+    this.setState({isLoading: true});
+
+    axios.get('http://snowball-api-backend.herokuapp.com/projects/project_XwPp9xaz/cards-by-state?state=IN_PROGRESS')
+         .then(function(response){
+
+
+           if (response.status == 200) {
+
+             console.log(response.data);
+
+             const countCards = response.data.map(card => {
+
+               return <CountTimer seconds={card.ttl} onCompletion={self.onCompletion} selectedCard={card}/>;
+
+             })
+
+             self.setState({countdown: countCards});
+             self.setState({isLoading: false});
+          }
+
+        });
+
+  }
+
+
   render() {
 
-    let countCards;
-
-    this.state.boardData.lanes.map(lane => {
-
-      if (lane.id == 'IN_PROGRESS') {
-
-        countCards = lane.cards.map(card => {
-
-          return <CountTimer seconds={card.ttl} onCompletion={this.onCompletion} selectedCard={card}/>;
-
-        })
-
-      }
-
-    })
 
 
 
     const { openDetail, dimmer } = this.state
     const { openStaking, size } = this.state
 
+    const userList = [
+          {key:'member', value: {id: 'user0000', role: 'member'}, text:'member'},
+          {key:'TPM', value: {id: 'user1111', role: 'TPM'}, text:'TPM'},
+          {key:'SU', value: {id: 'user2222', role: 'su'}, text:'su'}
+    ]
+
+
 
     return (
       <Layout>
 
-        {countCards}
+        <Dropdown placeholder={ls.get('User').role} search selection options={userList} onChange={this.onUserSelectHandler} />
+        <VotingListModal
+            votingDone={this.state.votingDone}
+            openVoting={this.state.openVoting}
+            votingList={this.state.votingList}
+            onCloseVotingList={this.onCloseVotingList}
+            />
+        <div>
+        {this.state.countdown}
+        </div>
+        {this.onVotingList}
 
-        <Dimmer active={this.state.isLoading} inverted>
-          <Loader inverted content='Loading' />
-        </Dimmer>
 
-        <h1>{SessionRole} - {UserId}</h1>
+                {/*<Dimmer active={this.state.isLoading} inverted>
+                  <Loader inverted content='Loading' />
+                </Dimmer>*/}
+
+        <h1>{ls.get('User').id} [{ls.get('User').role}]</h1>
+
 
         <Board draggable
               editable
@@ -307,10 +470,13 @@ class TotoBoard extends Component {
               laneDraggable={false}
               style={{backgroundColor: 'lightgray'}}
               onCardClick={this.showDetail('inverted')}
+              onCardDelete={this.onCardDeleteHandler}
+
               handleDragEnd={this.onDragEnd}
               data={this.state.boardData} />
 
         <DetailPageModal
+            onSelectedCardChange={updatedCard => {this.setState({selectedCard: updatedCard})}}
             openDetail={this.state.openDetail}
             closeDetail={this.closeDetail}
             selectedCard={this.state.selectedCard}
@@ -325,6 +491,7 @@ class TotoBoard extends Component {
                 address='0x3aafeFFc0aC78dC62512780fd9f191d19f8196B1'
                 selectedCard={this.state.selectedCard}
                 onClose={this.closeStaking}
+                onSelectedCardChange={updatedCard => {this.setState({selectedCard: updatedCard})}}
                 onStaking={isSelectedCardStaked => this.setState({isSelectedCardStaked})}
                 onAssign={this.onAssign}
 

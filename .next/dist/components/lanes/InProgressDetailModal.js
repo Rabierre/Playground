@@ -30,8 +30,6 @@ var _react2 = _interopRequireDefault(_react);
 
 var _semanticUiReact = require('semantic-ui-react');
 
-var _SessionMockup = require('../SessionMockup');
-
 var _CommentList = require('../CommentList');
 
 var _CommentList2 = _interopRequireDefault(_CommentList);
@@ -46,7 +44,7 @@ var _SubmissionForm2 = _interopRequireDefault(_SubmissionForm);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _jsxFileName = '/Users/Daniel/Desktop/playground/components/lanes/InProgressDetailModal.js';
+var _jsxFileName = '/Users/Daniel/Desktop/playground2/components/lanes/InProgressDetailModal.js';
 
 
 var InProgressDetailModal = function (_Component) {
@@ -74,47 +72,47 @@ var InProgressDetailModal = function (_Component) {
       return _react2.default.createElement('div', {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 25
+          lineNumber: 24
         }
       }, _react2.default.createElement(_semanticUiReact.Modal, { open: this.props.openDetail == 'IN_PROGRESS', onClose: this.props.closeDetail, __source: {
           fileName: _jsxFileName,
-          lineNumber: 26
+          lineNumber: 25
         }
       }, _react2.default.createElement(_semanticUiReact.Form, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 27
+          lineNumber: 26
         }
-      }, _react2.default.createElement(_semanticUiReact.Form.Field, { style: { fontSize: '20px', fontWeight: 'bold' }, control: _semanticUiReact.TextArea, value: this.props.selectedCard.title, __source: {
+      }, _react2.default.createElement(_semanticUiReact.Form.Field, { onChange: this.props.onChangeTitleHandler, style: { fontSize: '20px', fontWeight: 'bold' }, control: _semanticUiReact.TextArea, value: this.props.selectedCard.title, __source: {
+          fileName: _jsxFileName,
+          lineNumber: 32
+        }
+      }), _react2.default.createElement(_semanticUiReact.Form.Field, { onChange: this.props.onChangeDescriptionHandler, control: _semanticUiReact.TextArea, placeholder: 'Add a more detailed description...', value: this.props.selectedCard.description, __source: {
           fileName: _jsxFileName,
           lineNumber: 33
-        }
-      }), _react2.default.createElement(_semanticUiReact.Form.Field, { control: _semanticUiReact.TextArea, placeholder: 'Add a more detailed description...', value: this.props.selectedCard.description, __source: {
-          fileName: _jsxFileName,
-          lineNumber: 34
         }
       })), _react2.default.createElement(_semanticUiReact.Modal.Content, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 37
+          lineNumber: 36
         }
       }, _react2.default.createElement(_semanticUiReact.Modal.Description, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 38
+          lineNumber: 37
         }
       }, _react2.default.createElement(_SubmissionForm2.default, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 39
+          lineNumber: 38
         }
       }), _react2.default.createElement(_Submissions2.default, { selectedCard: this.props.selectedCard, __source: {
           fileName: _jsxFileName,
-          lineNumber: 40
+          lineNumber: 39
         }
       }), _react2.default.createElement(_CommentList2.default, { selectedCard: this.props.selectedCard, __source: {
           fileName: _jsxFileName,
-          lineNumber: 41
+          lineNumber: 40
         }
       })))));
     }
@@ -124,4 +122,4 @@ var InProgressDetailModal = function (_Component) {
 }(_react.Component);
 
 exports.default = InProgressDetailModal;
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbXBvbmVudHMvbGFuZXMvSW5Qcm9ncmVzc0RldGFpbE1vZGFsLmpzIl0sIm5hbWVzIjpbIlJlYWN0IiwiQ29tcG9uZW50IiwiQnV0dG9uIiwiSGVhZGVyIiwiSWNvbiIsIklucHV0IiwiTGlzdCIsIkltYWdlIiwiTW9kYWwiLCJUZXh0QXJlYSIsIklucHV0Rm9ybWF0IiwiRm9ybSIsIlNlc3Npb25Sb2xlIiwiVXNlcklkIiwiQ29tbWVudExpc3QiLCJTdWJtaXNzaW9ucyIsIlN1Ym1pc3Npb25Gb3JtIiwiSW5Qcm9ncmVzc0RldGFpbE1vZGFsIiwicHJvcHMiLCJzdGF0ZSIsImNvbW1lbnQiLCJzZWxlY3RlZENhcmQiLCJvcGVuRGV0YWlsIiwiY2xvc2VEZXRhaWwiLCJmb250U2l6ZSIsImZvbnRXZWlnaHQiLCJ0aXRsZSIsImRlc2NyaXB0aW9uIl0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUFBLEFBQU8sQUFBUTs7OztBQUNmLEFBQVMsQUFBUSxBQUFRLEFBQU0sQUFBTyxBQUFNLEFBQU8sQUFBTyxBQUFVLEFBQWE7O0FBQ2pGLEFBQVEsQUFBYSxBQUFhOztBQUNsQyxBQUFPLEFBQWlCOzs7O0FBQ3hCLEFBQU8sQUFBaUI7Ozs7QUFDeEIsQUFBTyxBQUFvQjs7Ozs7Ozs7O0lBRXJCLEE7aURBRUo7O2lDQUFBLEFBQVksT0FBTzt3Q0FBQTs7b0tBQUEsQUFDWCxBQUVOOztVQUFBLEFBQUs7O2VBQVEsQUFFRixBQUNUO29CQUFjLE1BQUEsQUFBSyxNQU5KLEFBR2pCLEFBQWEsQUFHYzs7QUFIZCxBQUVYOztXQUtIOzs7Ozs2QkFFUSxBQUVQOzs2QkFDSSxjQUFBOztvQkFBQTtzQkFBQSxBQUNFO0FBREY7QUFBQSxPQUFBLGtCQUNFLEFBQUMsd0NBQU0sTUFBTSxLQUFBLEFBQUssTUFBTCxBQUFXLGNBQXhCLEFBQXNDLGVBQWUsU0FBUyxLQUFBLEFBQUssTUFBbkUsQUFBeUU7b0JBQXpFO3NCQUFBLEFBQ0E7QUFEQTt5QkFDQSxBQUFDOztvQkFBRDtzQkFBQSxBQU1FO0FBTkY7QUFBQSx1Q0FNRSxBQUFDLHNCQUFELEFBQU0sU0FBTSxPQUFPLEVBQUMsVUFBRCxBQUFXLFFBQVEsWUFBdEMsQUFBbUIsQUFBK0IsVUFBbEQsQUFBMkQsQUFBUyxvQ0FBVSxPQUFPLEtBQUEsQUFBSyxNQUFMLEFBQVcsYUFBaEcsQUFBNkc7b0JBQTdHO3NCQU5GLEFBTUUsQUFDQTtBQURBO3dDQUNBLEFBQUMsc0JBQUQsQUFBTSxTQUFOLEFBQVksQUFBUyxvQ0FBVSxhQUEvQixBQUEyQyxzQ0FBcUMsT0FBTyxLQUFBLEFBQUssTUFBTCxBQUFXLGFBQWxHLEFBQStHO29CQUEvRztzQkFSRixBQUNBLEFBT0UsQUFHRjtBQUhFOzJCQUdELGNBQUQsdUJBQUEsQUFBTzs7b0JBQVA7c0JBQUEsQUFDRTtBQURGO0FBQUEseUJBQ0csY0FBRCx1QkFBQSxBQUFPOztvQkFBUDtzQkFBQSxBQUNFO0FBREY7QUFBQSx5QkFDRSxBQUFDOztvQkFBRDtzQkFERixBQUNFLEFBQ0E7QUFEQTtBQUFBLDBCQUNBLEFBQUMsdUNBQVksY0FBYyxLQUFBLEFBQUssTUFBaEMsQUFBc0M7b0JBQXRDO3NCQUZGLEFBRUUsQUFDQTtBQURBOzBCQUNBLEFBQUMsdUNBQVksY0FBYyxLQUFBLEFBQUssTUFBaEMsQUFBc0M7b0JBQXRDO3NCQWpCVixBQUNJLEFBQ0UsQUFXQSxBQUNFLEFBR0UsQUFTWDtBQVRXOzs7Ozs7QUFqQ3NCLEEsQUFnRHBDOztrQkFBQSxBQUFlIiwiZmlsZSI6IkluUHJvZ3Jlc3NEZXRhaWxNb2RhbC5qcyIsInNvdXJjZVJvb3QiOiIvVXNlcnMvRGFuaWVsL0Rlc2t0b3AvcGxheWdyb3VuZCJ9
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbXBvbmVudHMvbGFuZXMvSW5Qcm9ncmVzc0RldGFpbE1vZGFsLmpzIl0sIm5hbWVzIjpbIlJlYWN0IiwiQ29tcG9uZW50IiwiQnV0dG9uIiwiSGVhZGVyIiwiSWNvbiIsIklucHV0IiwiTGlzdCIsIkltYWdlIiwiTW9kYWwiLCJUZXh0QXJlYSIsIklucHV0Rm9ybWF0IiwiRm9ybSIsIkNvbW1lbnRMaXN0IiwiU3VibWlzc2lvbnMiLCJTdWJtaXNzaW9uRm9ybSIsIkluUHJvZ3Jlc3NEZXRhaWxNb2RhbCIsInByb3BzIiwic3RhdGUiLCJjb21tZW50Iiwic2VsZWN0ZWRDYXJkIiwib3BlbkRldGFpbCIsImNsb3NlRGV0YWlsIiwib25DaGFuZ2VUaXRsZUhhbmRsZXIiLCJmb250U2l6ZSIsImZvbnRXZWlnaHQiLCJ0aXRsZSIsIm9uQ2hhbmdlRGVzY3JpcHRpb25IYW5kbGVyIiwiZGVzY3JpcHRpb24iXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsQUFBTyxBQUFROzs7O0FBQ2YsQUFBUyxBQUFRLEFBQVEsQUFBTSxBQUFPLEFBQU0sQUFBTyxBQUFPLEFBQVUsQUFBYTs7QUFDakYsQUFBTyxBQUFpQjs7OztBQUN4QixBQUFPLEFBQWlCOzs7O0FBQ3hCLEFBQU8sQUFBb0I7Ozs7Ozs7OztJLEFBRXJCO2lEQUVKOztpQ0FBQSxBQUFZLE9BQU87d0NBQUE7O29LQUFBLEFBQ1gsQUFFTjs7VUFBQSxBQUFLOztlQUFRLEFBRUYsQUFDVDtvQkFBYyxNQUFBLEFBQUssTUFOSixBQUdqQixBQUFhLEFBR2M7O0FBSGQsQUFFWDs7V0FLSDs7Ozs7NkJBRVEsQUFFUDs7NkJBQ0ksY0FBQTs7b0JBQUE7c0JBQUEsQUFDRTtBQURGO0FBQUEsT0FBQSxrQkFDRSxBQUFDLHdDQUFNLE1BQU0sS0FBQSxBQUFLLE1BQUwsQUFBVyxjQUF4QixBQUFzQyxlQUFlLFNBQVMsS0FBQSxBQUFLLE1BQW5FLEFBQXlFO29CQUF6RTtzQkFBQSxBQUNBO0FBREE7eUJBQ0EsQUFBQzs7b0JBQUQ7c0JBQUEsQUFNRTtBQU5GO0FBQUEsdUNBTUUsQUFBQyxzQkFBRCxBQUFNLFNBQU0sVUFBVSxLQUFBLEFBQUssTUFBM0IsQUFBaUMsc0JBQXNCLE9BQU8sRUFBQyxVQUFELEFBQVcsUUFBUSxZQUFqRixBQUE4RCxBQUErQixVQUE3RixBQUFzRyxBQUFTLG9DQUFVLE9BQU8sS0FBQSxBQUFLLE1BQUwsQUFBVyxhQUEzSSxBQUF3SjtvQkFBeEo7c0JBTkYsQUFNRSxBQUNBO0FBREE7d0NBQ0EsQUFBQyxzQkFBRCxBQUFNLFNBQU0sVUFBVSxLQUFBLEFBQUssTUFBM0IsQUFBaUMsNEJBQWpDLEFBQTZELEFBQVMsb0NBQVUsYUFBaEYsQUFBNEYsc0NBQXFDLE9BQU8sS0FBQSxBQUFLLE1BQUwsQUFBVyxhQUFuSixBQUFnSztvQkFBaEs7c0JBUkYsQUFDQSxBQU9FLEFBR0Y7QUFIRTsyQkFHRCxjQUFELHVCQUFBLEFBQU87O29CQUFQO3NCQUFBLEFBQ0U7QUFERjtBQUFBLHlCQUNHLGNBQUQsdUJBQUEsQUFBTzs7b0JBQVA7c0JBQUEsQUFDRTtBQURGO0FBQUEseUJBQ0UsQUFBQzs7b0JBQUQ7c0JBREYsQUFDRSxBQUNBO0FBREE7QUFBQSwwQkFDQSxBQUFDLHVDQUFZLGNBQWMsS0FBQSxBQUFLLE1BQWhDLEFBQXNDO29CQUF0QztzQkFGRixBQUVFLEFBQ0E7QUFEQTswQkFDQSxBQUFDLHVDQUFZLGNBQWMsS0FBQSxBQUFLLE1BQWhDLEFBQXNDO29CQUF0QztzQkFqQlYsQUFDSSxBQUNFLEFBV0EsQUFDRSxBQUdFLEFBU1g7QUFUVzs7Ozs7O0FBakNzQixBLEFBZ0RwQzs7a0JBQUEsQUFBZSIsImZpbGUiOiJJblByb2dyZXNzRGV0YWlsTW9kYWwuanMiLCJzb3VyY2VSb290IjoiL1VzZXJzL0RhbmllbC9EZXNrdG9wL3BsYXlncm91bmQyIn0=

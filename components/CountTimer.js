@@ -54,6 +54,7 @@ class CountTimer extends React.Component {
     return(
       <div>
         {this.startTimer()}
+        {this.props.selectedCard.id} - {this.props.selectedCard.title}
         {this.state.time.m}:{this.state.time.s}
       </div>
     );

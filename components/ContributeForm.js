@@ -7,12 +7,17 @@ import {Router} from '../routes';
 class ContributeForm extends Component {
 
   state = {
-    value: '',
+
     errorMessage: '',
     loading: false
   };
 
+  onSelectedCardChange = (event) => {
 
+
+    this.props.selectedCard.point = event.target.value;
+    this.props.onSelectedCardChange(this.props.selectedCard);
+  }
 
   onSubmit = async event => {
 
@@ -37,11 +42,16 @@ class ContributeForm extends Component {
 
     }
 */}
-    this.setState({loading: false, value:''});
+
+
     this.props.onStaking(true);
-    this.props.onAssign(this.props.selectedCard);
+
+    console.log(this.props.selectedCard.point);
+    this.props.onAssign(this.props.selectedCard, this.props.selectedCard.point);
+    this.setState({loading: false, value:''});
     this.props.onClose();
     // this.props.selectedCard['test'] = 1;
+
 
 
   }
@@ -55,7 +65,7 @@ class ContributeForm extends Component {
 
           <Input
             value={this.props.selectedCard.point}
-            onChange={event => this.setState({value: event.target.value})}
+            onChange={this.onSelectedCardChange}
             label='ether'
             labelPosition='right'
           />

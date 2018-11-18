@@ -3,7 +3,6 @@ import {Container, Sticky, Button, Input, List, Image, Form} from 'semantic-ui-r
 import Header from './Header';
 import Head from 'next/head';
 import axios, { post }  from 'axios';
-import {SessionRole, UserId }from './SessionMockup'
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 class SubmissionList extends Component {

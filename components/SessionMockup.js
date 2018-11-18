@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 const SessionRole = 'admin';
-const UserId = 'user0000';
+const UserId = 'user2222';
 
 
 export {
