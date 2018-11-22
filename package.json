@@ -8,7 +8,7 @@
     "test": "mocha",
     "dev": "node server.js",
     "prod": "npm start",
-    "heroku-postbuild": "npm rebuild"
+    "heroku-postbuild": "npm run build && next build"
   },
   "author": "",
   "license": "ISC",
