@@ -24,7 +24,7 @@ class NotStartedDetailModal extends Component {
         <div>
           <Modal open={this.props.openDetail == 'NOT_STARTED'} onClose={this.props.closeDetail}>
           <Form>
-          <Form.Field onChange={this.props.onChangeTitleHandler} style={{fontSize: '20px', fontWeight: 'bold'}} control={TextArea} value={this.props.selectedCard.title} />
+          <Form.Field readOnly onChange={this.props.onChangeTitleHandler} style={{fontSize: '20px', fontWeight: 'bold'}} control={TextArea} value={this.props.selectedCard.title} />
           <Form.Field onChange={this.props.onChangeDescriptionHandler} control={TextArea} placeholder='Add a more detailed description...' value={this.props.selectedCard.description} />
           </Form>
 

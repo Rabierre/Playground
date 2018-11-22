@@ -43,7 +43,7 @@ class SubmissionList extends Component {
               <CopyToClipboard text={submission.id}
                 onCopy={() => this.setState({copied: true})}>
 
-                <button>Copy notebook id</button>
+                <a> {submission.id}</a>
 
               </CopyToClipboard>
 
