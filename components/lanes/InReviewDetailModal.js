@@ -29,8 +29,8 @@ class InReviewDetailModal extends Component {
               <Button.Or />
               <Button onClick={this.props.onDownVote}>Down vote</Button>
             </Button.Group>
-            <Form.Field onChange={this.props.onChangeTitleHandler} style={{fontSize: '20px', fontWeight: 'bold'}} control={TextArea} value={this.props.selectedCard.title} />
-            <Form.Field onChange={this.props.onChangeDescriptionHandler} control={TextArea} placeholder='Add a more detailed description...' value={this.props.selectedCard.description} />
+            <Form.Field readOnly onChange={this.props.onChangeTitleHandler} style={{fontSize: '20px', fontWeight: 'bold'}} control={TextArea} value={this.props.selectedCard.title} />
+            <Form.Field readOnly onChange={this.props.onChangeDescriptionHandler} control={TextArea} placeholder='Add a more detailed description...' value={this.props.selectedCard.description} />
           </Form>
 
           <Modal.Content>
