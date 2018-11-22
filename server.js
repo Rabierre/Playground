@@ -148,15 +148,11 @@ app.prepare().then(() => {
 //
 // })
   server.get('*', (req, res) => {
-
     return handle(req, res);
-
   });
 
-  server.listen(3000, (err) => {
-
+  server.listen((process.env.PORT || '3000'), (err) => {
     console.log("Ready on localhost:3000");
-
   });
   // createServer(handler).listen(3000, err => {
   //
@@ -164,7 +160,4 @@ app.prepare().then(() => {
   //   console.log("Ready on localhost:3000");
   //
   // });
-
-
-
 });
