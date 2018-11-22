@@ -401,7 +401,7 @@ class TotoBoard extends Component {
 
     this.setState({isLoading: true});
 
-    axios.get('http://snowball-api-backend.herokuapp.com/projects/project_XwPp9xaz/cards-by-state?state=IN_PROGRESS')
+    axios.get('https://snowball-api-backend.herokuapp.com/projects/project_XwPp9xaz/cards-by-state?state=IN_PROGRESS')
          .then(function(response){
 
 
